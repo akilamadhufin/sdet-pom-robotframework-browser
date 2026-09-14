@@ -1,0 +1,55 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# Virtual environments and local Python tooling
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# Test and coverage output
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+output.xml
+log.html
+report.html
+results/
+
+# Browser automation and Node/Playwright artifacts
+node_modules/
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+
+# Packaging and build output
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local logs and temporary files
+*.log
+*.tmp
+*.temp
