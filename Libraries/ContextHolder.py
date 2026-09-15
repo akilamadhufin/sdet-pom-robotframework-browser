@@ -1,6 +1,6 @@
 from Libraries.UIClient import UIClient
-from Libraries.Views.MainView import MainView
 from Libraries.UILibrary.MainTasks import MainTasks
+from Libraries.Views.SignupView import Tasks as SignupViewTasks
 
 class Context:
     """
@@ -8,5 +8,6 @@ class Context:
     """
     client: UIClient
     main_tasks: MainTasks
+    signup: SignupViewTasks
 
 CTX = Context()    

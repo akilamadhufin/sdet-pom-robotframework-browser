@@ -1,4 +1,3 @@
-from Libraries.ContextHolder import CTX
 from Libraries.Views.MainView import MainView
 
 class MainTasks:
@@ -12,6 +11,9 @@ class MainTasks:
     def __init__(self,client):
         # CTX.main_view is created in CreateContextTasks.py
         self.view = MainView(client)
+
+    def give_data_consent(self):
+        self.view.give_data_consent()
 
     def go_home(self):
         """Navigate to the Home page."""
