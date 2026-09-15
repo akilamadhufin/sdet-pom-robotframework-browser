@@ -5,19 +5,14 @@ class Actions:
     NAME_INPUT = "//input[@data-qa='signup-name']"
     EMAIL_INPUT = "//input[@data-qa='signup-email']"
     SIGNUP_BUTTON = "//button[@data-qa='signup-button']"
-
     TITLE_RADIO_MR = "//input[@id='id_gender1']"
     TITLE_RADIO_MRS = "//input[@id='id_gender2']"
-
     PASSWORD_INPUT = "//input[@id='password']"
-
     DAY_DROPDOWN = "//select[@id='days']"
     MONTH_DROPDOWN = "//select[@id='months']"
     YEAR_DROPDOWN = "//select[@id='years']"
-
     NEWSLETTER_CHECKBOX = "//input[@id='newsletter']"
     OFFERS_CHECKBOX = "//input[@id='optin']"
-
     FIRST_NAME = "//input[@id='first_name']"
     LAST_NAME = "//input[@id='last_name']"
     COMPANY = "//input[@id='company']"
@@ -28,8 +23,11 @@ class Actions:
     CITY = "//input[@id='city']"
     ZIPCODE = "//input[@id='zipcode']"
     MOBILE_NUMBER = "//input[@id='mobile_number']"
-
     CREATE_ACCOUNT_BUTTON = "//button[@data-qa='create-account']"
+    ACCOUNT_CREATED_HEADER = "//h2[@data-qa='account-created']"
+    ACCOUNT_CREATED_CONTINUE_BUTTON = "//a[@data-qa='continue-button']"
+    LOGGED_USER_NAME = "//li/a/b[text()='REPLACE_ME']"
+
 
     def __init__(self, client: UIClient):
         self.client = client
@@ -104,6 +102,12 @@ class Actions:
     def click_create_account(self):
         self.client.click_w(self.CREATE_ACCOUNT_BUTTON)
 
+    def verify_user_registration(self, name):
+        self.client.wait_for_element_to_be_visible(self.ACCOUNT_CREATED_HEADER)
+        self.client.click_w(self.ACCOUNT_CREATED_CONTINUE_BUTTON)
+        self.client.wait_until_page_idle()
+        self.client.wait_for_element_to_be_visible(self.LOGGED_USER_NAME.replace("REPLACE_ME", name))
+
 
 class Tasks:
     """
@@ -146,4 +150,7 @@ class Tasks:
         self.actions.enter_mobile(mobile)
 
         # 19: create account
-        self.actions.click_create_account()      
+        self.actions.click_create_account()
+
+    def verify_user_registration(self, name):
+        self.actions.verify_user_registration(name)          

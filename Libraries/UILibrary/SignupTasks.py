@@ -15,3 +15,6 @@ class SignupTasks:
         CTX.signup.register_user(name, email, password, day, month, year,
             first_name, last_name, company, address1, address2,
             country, state, city, zipcode, mobile,)
+
+    def verify_user_registration_successfully(self, name):
+        CTX.signup.verify_user_registration(name)    

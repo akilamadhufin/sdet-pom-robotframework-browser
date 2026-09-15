@@ -2,6 +2,7 @@ from Libraries.ContextHolder import CTX
 from Libraries.UIClient import UIClient
 from Libraries.UILibrary.MainTasks import MainTasks
 from Libraries.Views.SignupView import Tasks as SignupViewTasks
+from Libraries.Views.LoginView import Tasks as LoginViewTasks
 
 class CreateContextTasks:
     """
@@ -26,6 +27,7 @@ class CreateContextTasks:
         CTX.client = UIClient(url, headless=headless) # Create UIClient
         CTX.main_tasks = MainTasks(CTX.client)
         CTX.signup = SignupViewTasks(CTX.client)
+        CTX.login = LoginViewTasks(CTX.client)
 
     def teardown_browser(self):
         """
