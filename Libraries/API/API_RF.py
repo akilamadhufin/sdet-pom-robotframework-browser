@@ -20,9 +20,10 @@ class API_RF(DynamicCore):
     """
 
     def __init__(self, base_url: str):
-
-        # Create the HTTP client
-        client = APIClient(base_url)
+        # Create and connect the reusable HTTP session.
+        # Without connect(), API requests fail with:
+        # "API client is not connected".
+        client = APIClient(base_url).connect()
 
         # Load both layers into Robot Framework
         super().__init__([
