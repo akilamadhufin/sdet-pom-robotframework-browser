@@ -1,10 +1,10 @@
 from Browser import Browser
-from Browser.utils.data_types import SupportedBrowsers, ElementState
+from Browser.utils.data_types import SupportedBrowsers, ElementState, SelectAttribute
 from datetime import timedelta
 
 class UIClient:
 
-    def __init__(self, url,headless=False):
+    def __init__(self, url, headless=False):
         """
         Initialize Playwright (via Browser library), open a browser, create a context,
         and navigate to the starting URL.
@@ -48,7 +48,9 @@ class UIClient:
     def clear_text(self, selector):
         self.browser.clear_text(selector=selector)
 
-                    
+    def select_option(self, selector, value):
+        self.browser.select_options_by(selector, SelectAttribute.value, value)
+
     # ---------------------------------------------------------
     # WAIT FUNCTIONS
     # ---------------------------------------------------------
@@ -77,7 +79,7 @@ class UIClient:
     # ---------------------------------------------------------
 
     def wait_until_page_idle(self, timeout="5 s"):
-        self.browser.wait_for_load_state("networkidle", timeout=timeout)
+        self.browser.wait_for_load_state("domcontentloaded", timeout=timeout)
 
     # ---------------------------------------------------------
     # CLOSE BROWSER
