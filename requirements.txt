@@ -1,0 +1,11 @@
+# Robot Framework test runner
+robotframework
+
+# Playwright-based browser automation library for Robot Framework
+robotframework-browser
+
+# Required for DynamicCore and custom Robot Python libraries
+robotframework-pythonlibcore
+
+# HTTP client used by the API cleanup and API keywords
+requests
