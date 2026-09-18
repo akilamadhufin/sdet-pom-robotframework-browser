@@ -39,6 +39,10 @@ class UIClient:
     def click_w(self, selector):
         self.browser.click(selector=selector)
 
+    def click_if_present(self, selector):
+        if self.browser.get_element_count(selector=selector) > 0:
+            self.click_w(selector)
+
     def type_text(self, selector, text):
         self.browser.type_text(selector=selector, txt=text)
 

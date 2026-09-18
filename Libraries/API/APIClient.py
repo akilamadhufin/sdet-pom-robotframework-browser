@@ -19,13 +19,48 @@ class APIClient:
     """
 
     def __init__(self, base_url: str, timeout: int=30):
-        self.base_url = base_url.rstrip("/") # Remove trailing slash if user adds it
+        base_url = base_url.rstrip("/")
+        if base_url.endswith("/api"):
+            self.base_url = base_url
+            self.site_url = base_url[:-4]
+        else:
+            self.site_url = base_url
+            self.base_url = f"{base_url}/api"
         self.timeout = timeout
         self.session = None
 
     def connect(self):
-        """Create a reusable HTTP session."""
+        """    
+        Create a reusable HTTP session and initialize the CSRF data required
+        by Automation Exercise for unsafe requests such as DELETE.
+        """
         self.session = requests.Session()
+
+        # Django checks that unsafe HTTPS requests come from the same site.
+        self.session.headers.update({
+            "Accept": "application/json, text/plain, */*",
+            "Origin": self.site_url,
+            "Referer": f"{self.site_url}/",
+            "User-Agent": "Basic-SWT API Test Client"
+        })
+
+        try:
+            # Visit a page that supplies the CSRF cookie.
+            self.session.get(
+                f"{self.site_url}/login",
+                timeout=self.timeout
+            ).raise_for_status()
+
+            # Send the CSRF token as a header on DELETE/POST/PUT requests.
+            csrf_token = self.session.cookies.get("csrftoken")
+            if csrf_token:
+                self.session.headers.update({
+                    "X-CSRFToken": csrf_token
+                })
+
+        except requests.RequestException as error:
+            raise RequestError(f"Could not initialize API session. {error}") from error        
+
         return self
 
     def _request(self, method: str, endpoint: str, payload: dict | None = None, params: dict | None = None):

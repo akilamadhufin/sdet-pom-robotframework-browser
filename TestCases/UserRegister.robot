@@ -2,7 +2,7 @@
 Library    ../Libraries/CreateContextTasks.py    AS    Context
 Library    ../Libraries/UILibrary/SignupTasks.py
 Library    ../Libraries/UILibrary/LoginTasks.py
-Library    ../Libraries/API/API_RF.py    https://automationexercise.com
+Resource    ../Resources/API.resource
 
 Test Setup    Context.Setup Browser    https://automationexercise.com
 Test Teardown    Context.Teardown Browser 
@@ -16,6 +16,10 @@ Register New User And Login Successfully
     ...    Canada    Kandy    Gampaha    20000    0712345678
     SignupTasks.Verify User Registration Successfully    AkilaR        
     LoginTasks.Logout User
-    Context.Teardown Browser
-    [Teardown]    Delete Account - API E    akila@example.com    12345
+    [Teardown]    Cleanup Test User    akila@example.com    
     
+*** Keywords ***
+Cleanup Test User
+    [Arguments]    ${email}
+    Delete User Account Via API    ${email}    12345
+    Context.Teardown Browser

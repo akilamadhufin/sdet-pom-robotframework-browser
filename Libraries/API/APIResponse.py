@@ -18,6 +18,20 @@ class APIResponse:
         except ValueError:
             self.json = None
 
+
+        # Automation Exercise returns its actual result in JSON.
+        # Example: {"responseCode": 200, "message": "Account deleted!"}
+        if isinstance(self.json, dict):
+            self.response_code = self.json.get("responseCode", self.status_code)
+            self.message = self.json.get("message", self.text)
+            self.data = self.json
+
+        else:
+        # Safe fallback for responses that are not JSON objects.  
+            self.response_code = self.status_code
+            self.message = self.text
+            self.data = None          
+
     def get_value(self, key: str):
         # Return exactly one value for the given key.
         values = self.get_values(key)

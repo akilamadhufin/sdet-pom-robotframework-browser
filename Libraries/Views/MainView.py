@@ -11,7 +11,7 @@ class MainView:
     # -----------------------------------------
     # GLOBAL NAVIGATION LOCATORS
     # -----------------------------------------
-    DATA_CONSENT = "//button[@aria-label='Consent']"
+    DATA_CONSENT = "//button[@aria-label='Consent'] | //a[contains(normalize-space(), 'Consent')]"
     HOME_BUTTON = "//a[@href='/' and contains(text(),'Home')]"
     SIGNUP_LOGIN_BUTTON = "//a[@href='/login' and contains(text(),'Signup / Login')]"
     PRODUCTS_BUTTON = "//a[contains(text(),'Products')]"
@@ -56,8 +56,8 @@ class MainView:
     # -----------------------------------------
 
     def give_data_consent(self):
-        self.client.click_w(self.DATA_CONSENT)
-        self.wait_until_page_is_idle() 
+        self.client.click_if_present(self.DATA_CONSENT)
+        self.wait_until_page_is_idle()
 
     def go_home(self):
         """Navigate to the Home page."""

@@ -9,6 +9,7 @@
 
 from robotlibcore import keyword
 from Libraries.API.APIEndpoints import APIEndpoints
+import time
 
 def robot_rename(func):
     """
@@ -79,15 +80,26 @@ class APITasks:
         """
         Deletes a user and confirms deletion.
         """
-        delete_response = self.endpoints.delete_account(email, password)
+        client = self.endpoints.client
+        delete_response = client.delete(
+            "deleteAccount",
+            {"email": email, "password": password},
+        )
 
-        if delete_response.status_code != 200:
+        if delete_response.response_code != 200:
             raise AssertionError(f"User deletion failed: {delete_response.message}")
 
-        verify_response = self.endpoints.get_user_by_email(email)
-
-        if verify_response.status_code == 200:
-            raise AssertionError(f"User still exists after deletion.")
+        for attempt in range(3):
+            verify_response = client.get(
+                "getUserDetailByEmail",
+                {"email": email},
+            )
+            if verify_response.response_code != 200:
+                break
+            if attempt < 2:
+                time.sleep(1)
+        else:
+            raise AssertionError("User still exists after deletion.")
 
         return delete_response
 
