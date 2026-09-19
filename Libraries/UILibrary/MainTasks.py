@@ -8,7 +8,7 @@ class MainTasks:
     Tests should call these tasks instead of calling MainView directly.
     """
 
-    def __init__(self,client):
+    def __init__(self, client):
         # CTX.main_view is created in CreateContextTasks.py
         self.view = MainView(client)
 
