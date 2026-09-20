@@ -16,7 +16,14 @@ Register New User And Login Successfully
     ...    Canada    Kandy    Gampaha    20000    0712345678
     SignupTasks.Verify User Registration Successfully    AkilaR        
     LoginTasks.Logout User
-    [Teardown]    Cleanup Test User    akila@example.com    
+    [Teardown]    Cleanup Test User    akila@example.com
+
+User Can Login Successfully
+    [Documentation]    Verify that a new user can login successfully
+    [Tags]    signup    regression    smoke
+    LoginTasks.Login User    testemail@comp.com    12345
+    LoginTasks.Verify User Login    testuser1
+    LoginTasks.Logout User        
     
 *** Keywords ***
 Cleanup Test User
