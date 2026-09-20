@@ -37,7 +37,10 @@ class UIClient:
 
     # Custom click
     def click_w(self, selector):
-        self.browser.click(selector=selector)
+        self.browser.click_with_options(selector=selector)
+
+    def js_click(self, selector):
+        self.browser.evaluate_javascript(selector, "(el) => el.click()")
 
     def click_if_present(self, selector):
         if self.browser.get_element_count(selector=selector) > 0:
@@ -54,6 +57,52 @@ class UIClient:
 
     def select_option(self, selector, value):
         self.browser.select_options_by(selector, SelectAttribute.value, value)
+
+    def accept_alert(self):
+        self.browser.run_keyword("handle_js_dialog", ["accept"], {})
+
+    def disable_confirm(self):
+        self.browser.evaluate_javascript(None, "window.confirm = () => true;")
+
+    
+    def sleep(self, seconds):
+        import time
+        time.sleep(seconds)
+
+
+    def upload_file(self, selector, file_path):
+        """
+        Upload a file to <input type="file"> without opening the native OS dialog.
+        Works in headless/CI. Uses Browser library's snake_case keywords.
+        """
+        browser = self.browser
+
+        # Preferred: directly set the file on the input located by selector.
+        try:
+            return browser.run_keyword(
+                "upload_file_by_selector", [selector, file_path], {}
+            )
+        except Exception as e_direct:
+            last_err = e_direct
+
+        # Fallback: promise-based flow
+        try:
+            return browser.run_keyword("promise_to_upload_file", [file_path], {})
+        except Exception as e_promise:
+            available = []
+            try:
+                available = [
+                    k for k in browser.get_keyword_names() if "file" in k.lower()
+                ]
+            except Exception:
+                pass
+            raise AttributeError(
+                "No usable upload keyword could be executed.\n"
+                f"Tried: upload_file_by_selector (err: {last_err}) and promise_to_upload_file (err: {e_promise}).\n"
+                f"Available keywords containing 'file': {available}"
+            )
+        
+
 
     # ---------------------------------------------------------
     # WAIT FUNCTIONS

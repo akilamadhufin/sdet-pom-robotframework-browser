@@ -3,8 +3,9 @@ from Libraries.UIClient import UIClient
 from Libraries.UILibrary.MainTasks import MainTasks
 from Libraries.Views.SignupView import Tasks as SignupViewTasks
 from Libraries.Views.LoginView import Tasks as LoginViewTasks
-from Libraries.Views.CartView import Tasks as CartViesTasks
+from Libraries.Views.CartView import Tasks as CartViewTasks
 from Libraries.Views.CheckoutView import Tasks as CheckoutViewTasks
+from Libraries.Views.ContactUsView import Tasks as ContactUsViewTasks
 
 class CreateContextTasks:
     """
@@ -30,8 +31,9 @@ class CreateContextTasks:
         CTX.main_tasks = MainTasks(CTX.client)
         CTX.signup = SignupViewTasks(CTX.client)
         CTX.login = LoginViewTasks(CTX.client)
-        CTX.cart = CartViesTasks(CTX.client)
+        CTX.cart = CartViewTasks(CTX.client)
         CTX.checkout = CheckoutViewTasks(CTX.client)
+        CTX.contactus = ContactUsViewTasks(CTX.client)
 
     def teardown_browser(self):
         """
