@@ -24,10 +24,11 @@ class Actions:
         self.client.upload_file(self.UPLOAD_INPUT, file_path)
 
     def submit_form(self):
-        self.client.click_w(self.SUBMIT_BUTTON)
-        self.client.sleep(10)   
-        # self.client.wait_until_page_idle()
-        # self.client.accept_alert()
+        self.client.wait_for_element_to_be_visible(self.SUBMIT_BUTTON)
+        self.client.disable_confirm()
+        self.client.js_click(self.SUBMIT_BUTTON)
+        self.client.wait_until_page_idle()
+        # self.client.accept_alert() # we have bypassed the popup message.
         
     def wait_for_success(self):
         self.client.wait_for_element_to_be_visible(self.SUCCESS_MESSAGE)
@@ -45,5 +46,4 @@ class Tasks:
         self.actions.fill_form(name, email, subject, message)
         self.actions.upload_file(file_path)
         self.actions.submit_form()
-        # self.actions.wait_for_success()
-        # self.actions.click_Home()                                     
+        self.actions.wait_for_success()                                   

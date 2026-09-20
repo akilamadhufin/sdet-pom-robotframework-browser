@@ -37,7 +37,10 @@ class UIClient:
 
     # Custom click
     def click_w(self, selector):
-        self.browser.click(selector=selector)
+        self.browser.click_with_options(selector=selector)
+
+    def js_click(self, selector):
+        self.browser.evaluate_javascript(selector, "(el) => el.click()")
 
     def click_if_present(self, selector):
         if self.browser.get_element_count(selector=selector) > 0:
@@ -58,6 +61,10 @@ class UIClient:
     def accept_alert(self):
         self.browser.run_keyword("handle_js_dialog", ["accept"], {})
 
+    def disable_confirm(self):
+        self.browser.evaluate_javascript(None, "window.confirm = () => true;")
+
+    
     def sleep(self, seconds):
         import time
         time.sleep(seconds)
