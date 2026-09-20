@@ -35,6 +35,7 @@ User Can Register, Add Products To Cart And Checkout
     CheckoutTasks.Place Order
     CheckoutTasks.Complete Payment    ${CARD_NAME}    ${CARD_NUMBER}    ${CVC}    ${EXP_MONTH}    ${EXP_YEAR}
     CheckoutTasks.Download Invoice And Continue
+    LoginTasks.Logout User
     [Teardown]    Cleanup Test User    akila@example.com   
 
 
