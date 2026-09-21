@@ -30,6 +30,10 @@ class UIClient:
         # Open the first page of the test. Place where 1st test starts
         self.browser.new_page(url)
 
+        # REMOVE ADS ON FIRST PAGE LOAD
+        self.remove_ads()
+
+
 
     # ---------------------------------------------------------
     # Basic UI Actions
@@ -38,6 +42,7 @@ class UIClient:
     # Custom click
     def click_w(self, selector):
         self.browser.click_with_options(selector=selector)
+        self.remove_ads()   # REMOVE ADS AFTER EVERY CLICK
 
     def js_click(self, selector):
         self.browser.evaluate_javascript(selector, "(el) => el.click()")
@@ -136,7 +141,14 @@ class UIClient:
 
     # ---------------------------------------------------------
     # CLOSE BROWSER
-    # ---------------------------------------------------------      
+    # ---------------------------------------------------------
+
+    def remove_ads(self):
+        self.browser.evaluate_javascript(
+            None,
+            "document.querySelectorAll('iframe').forEach(f => f.remove());"
+        )
+    
 
     def close_browser(self):
         try:
