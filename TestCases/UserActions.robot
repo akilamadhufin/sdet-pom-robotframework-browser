@@ -11,7 +11,7 @@ Test Teardown    Context.Teardown Browser
 *** Test Cases ***
 Register New User And Login Successfully
     [Documentation]    Verify that a new user can be registered successfully
-    [Tags]    signup    regression    smoke 
+    [Tags]    signup    regression    smoke    Production 
     SignupTasks.Register New User   AkilaR    akila@example.com    12345    10    5    1995
     ...    Akila    Randunu    Abloy    Street 1    Street 2
     ...    Canada    Kandy    Gampaha    20000    0712345678
@@ -21,7 +21,7 @@ Register New User And Login Successfully
 
 User Can Login Successfully
     [Documentation]    Verify that a new user can login successfully
-    [Tags]    signup    regression    smoke
+    [Tags]    signup    regression    smoke    Production
     LoginTasks.Login User    testemail@comp.com    12345
     LoginTasks.Verify User Login    testuser1
     LoginTasks.Logout User
@@ -29,7 +29,7 @@ User Can Login Successfully
 
 User Can Submit Contact Us Form Successfully
     [Documentation]    Verify Contact Us form submission with file upload
-    [Tags]    contactus    regression    smoke
+    [Tags]    contactus    regression    smoke    Production
     LoginTasks.Login User    testemail@comp.com    12345
     LoginTasks.Verify User Login    testuser1
     ContactUsTasks.Submit Contact Us Form    
