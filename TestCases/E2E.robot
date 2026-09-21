@@ -23,7 +23,7 @@ ${PRODUCT_3}       Summer White Top
 *** Test Cases ***
 User Can Register, Add Products To Cart And Checkout
     [Documentation]    Full E2E flow: Signup Add products → Cart → Checkout → Payment → Invoice
-    [Tags]    signup    regression    smoke    E2E
+    [Tags]    signup    regression    smoke    E2E    Production
     SignupTasks.Register New User   AkilaR    akila@example.com    12345    10    5    1995
     ...    Akila    Randunu    Abloy    Street 1    Street 2
     ...    Canada    Kandy    Gampaha    20000    0712345678
@@ -40,7 +40,7 @@ User Can Register, Add Products To Cart And Checkout
 
 User Can Register, Login, Add Products To Cart, Checkout And Delete Account
     [Documentation]    Full E2E flow: Signup → Login → Add products → Cart → Checkout → Payment → Invoice → Delete Account
-    [Tags]    signup    regression    smoke    E2E
+    [Tags]    signup    regression    smoke    E2E    Production    Todo
     SignupTasks.Register New User   AkilaR    akila@example.com    12345    10    5    1995
     ...    Akila    Randunu    Abloy    Street 1    Street 2
     ...    Canada    Kandy    Gampaha    20000    0712345678
