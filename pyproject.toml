@@ -18,7 +18,7 @@ dependencies = [
     "robotframework",                  # Core Robot Framework test runner
     "robotframework-browser",          # Browser library (Playwright-based UI automation)
     "robotframework-retryfailed",      # Listener to retry failed tests automatically
-    "robotframework-pythonlibcore"     # Required internal library for Browser & RF extensions
+    "robotframework-pythonlibcore",     # Required internal library for Browser & RF extensions
     "requests"                         # HTTP client for API cleanup and API keywords
 ]
 
