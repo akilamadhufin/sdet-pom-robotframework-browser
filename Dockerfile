@@ -1,8 +1,9 @@
 FROM python:3.10-slim
 
-# System dependencies for Playwright
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     wget \
+    curl \
     xvfb \
     libnss3 \
     libatk1.0-0 \
@@ -16,7 +17,11 @@ RUN apt-get update && apt-get install -y \
     libxshmfence1 \
     && rm -rf /var/lib/apt/lists/*
 
-# Python dependencies
+# Install Node.js + npm (required for Robot Framework Browser)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
+
+# Upgrade pip and install Python dependencies
 RUN pip install --upgrade pip && \
     pip install \
         robotframework \
@@ -26,11 +31,9 @@ RUN pip install --upgrade pip && \
         requests \
         tox
 
-# Install Playwright browsers for Robot Framework Browser
-RUN rfbrowser init
+# Install Playwright browsers
+RUN rfbrowser init --with-deps
 
-# Workspace inside container
 WORKDIR /workspace
 
-# Default command
 CMD ["bash"]
