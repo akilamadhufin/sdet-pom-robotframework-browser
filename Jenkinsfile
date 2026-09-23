@@ -1,5 +1,10 @@
 pipeline {
-    agent { label 'robot' }
+    agent {
+        docker {
+            image 'basic-swt-rf:latest'
+            args '-u root'
+        }
+    }
 
     options {
         timestamps()
@@ -11,7 +16,6 @@ pipeline {
         stage('Install project') {
             steps {
                 sh '''
-                    # Install your project (pyproject.toml)
                     python3 -m pip install --upgrade pip
                     pip install .
                 '''
@@ -21,7 +25,6 @@ pipeline {
         stage('Run tests via tox') {
             steps {
                 sh '''
-                    # Run everything through tox
                     tox
                 '''
             }
