@@ -1,38 +1,20 @@
 pipeline {
-    agent {
-        docker {
-            image 'basic-swt-rf:latest'
-            args '-u root'
-            reuseNode true
-        }
-    }
-
-    options {
-        timestamps()
-        disableConcurrentBuilds()
-    }
+    agent any
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Install dependencies') {
-            steps {
-                sh '''
-                    python3 -m pip install --upgrade pip
-                '''
-            }
-        }
-
         stage('Run tests via tox') {
             steps {
-                sh '''
-                    tox
-                '''
+                script {
+                    docker.image('basic-swt-rf:latest').inside('-u root') {
+                        sh 'tox'
+                    }
+                }
             }
         }
     }
