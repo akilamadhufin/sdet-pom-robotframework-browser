@@ -19,11 +19,10 @@ pipeline {
             }
         }
 
-        stage('Install project') {
+        stage('Install dependencies') {
             steps {
                 sh '''
                     python3 -m pip install --upgrade pip
-                    pip install .
                 '''
             }
         }
