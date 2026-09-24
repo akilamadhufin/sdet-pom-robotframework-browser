@@ -34,6 +34,6 @@ RUN pip install --upgrade pip && \
 # Install Playwright browsers
 RUN rfbrowser init --with-deps
 
-WORKDIR /workspace
+WORKDIR /home/jenkins/agent/workspace/Basic-SWT-Pipeline
 
 CMD ["bash"]
