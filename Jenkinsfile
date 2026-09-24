@@ -3,6 +3,7 @@ pipeline {
         docker {
             image 'basic-swt-rf:latest'
             args '-u root'
+            reuseNode true
         }
     }
 
