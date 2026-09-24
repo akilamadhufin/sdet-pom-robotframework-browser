@@ -13,6 +13,12 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Install project') {
             steps {
                 sh '''
