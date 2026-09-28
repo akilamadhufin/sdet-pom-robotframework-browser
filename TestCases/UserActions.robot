@@ -3,6 +3,7 @@ Library    ../Libraries/CreateContextTasks.py    AS    Context
 Library    ../Libraries/UILibrary/SignupTasks.py
 Library    ../Libraries/UILibrary/LoginTasks.py
 Library    ../Libraries/UILibrary/ContactUsTasks.py
+Library    ../Libraries/UILibrary/ProductTasks.py
 Resource    ../Resources/API.resource
 
 Test Setup    Context.Setup Browser    https://automationexercise.com
@@ -26,7 +27,6 @@ User Can Login Successfully
     LoginTasks.Verify User Login    testuser1
     LoginTasks.Logout User
 
-
 User Can Submit Contact Us Form Successfully
     [Documentation]    Verify Contact Us form submission with file upload
     [Tags]    contactus    regression    smoke    Production
@@ -40,8 +40,21 @@ User Can Submit Contact Us Form Successfully
         ...    ${CURDIR}/../TestData/invoice.txt    
     LoginTasks.Logout User
 
+User Can Search Product Without Signup
+    [Documentation]    Verify user can search products without an account
+    [Tags]    contactus    regression    smoke    Production
+    ProductTasks.Search Product And Verify    Tshirt
+    ProductTasks.Search Product And Verify    Green Side Placket Detail T-Shirt
 
-    
+Registered User Can Search Product
+    [Documentation]    Verify registered user can search products
+    [Tags]    contactus    regression    smoke    Production
+    LoginTasks.Login User    testemail@comp.com    12345
+    LoginTasks.Verify User Login    testuser1
+    ProductTasks.Search Product And Verify    Tshirt
+    ProductTasks.Search Product And Verify    Green Side Placket Detail T-Shirt
+
+
 *** Keywords ***
 Cleanup Test User
     [Arguments]    ${email}

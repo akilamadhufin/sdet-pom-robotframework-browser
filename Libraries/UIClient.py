@@ -128,6 +128,15 @@ class UIClient:
     def get_text(self, selector):
         return self.browser.get_text(selector=selector)
 
+    def get_texts(self, selector):
+        count = self.browser.get_element_count(selector=selector)
+        texts = []
+        for index in range(1, count + 1):
+            item_selector = f"({selector})[{index}]"
+            text = self.browser.get_text(selector=item_selector)
+            texts.append(text)
+        return texts
+
     def get_count(self, selector):
         return self.browser.get_element_count(selector=selector)
 
