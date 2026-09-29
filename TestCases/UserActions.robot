@@ -56,13 +56,13 @@ Registered User Can Search Product
 
 User Can Add Product Review Without Signup
     [Documentation]    Verify user can add reviews to products
-    [Tags]    contactus    regression    smoke    Production
+    [Tags]    contactus    regression    smoke    Production    TAfix
     ProductTasks.Search Product And Verify    Blue Top
     ProductTasks.Open Product Details Add Review And Verify    Blue Top    Akila Randunu    akila@example.com    This product is amazing!
 
 Registered User Can Add Product Review
     [Documentation]    Verify registered user can add reviews to products
-    [Tags]    contactus    regression    smoke    Production
+    [Tags]    contactus    regression    smoke    Production    TAfix
     LoginTasks.Login User    testemail@comp.com    12345
     LoginTasks.Verify User Login    testuser1
     ProductTasks.Search Product And Verify    Blue Top
