@@ -30,7 +30,7 @@ class Actions:
 
     def open_product_details(self, product_name):
         locator = self.PRODUCT_INFO_XPATH.replace("REPLACE_ME", product_name)
-        self.client.wait_for_element_to_be_visible(locator)
+        self.client.wait_for_element_to_be_visible(locator, timeout=10000)
         self.client.click_w(self.VIEW_PRODUCT_BUTTON)
         self.client.wait_until_page_idle()
 
