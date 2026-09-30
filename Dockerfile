@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     libgbm1 \
     libasound2 \
     libxshmfence1 \
+    libcups2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js + npm (required for Robot Framework Browser)
