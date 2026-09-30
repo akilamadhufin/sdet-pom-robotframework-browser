@@ -32,7 +32,7 @@ RUN pip install --upgrade pip && \
         tox
 
 # Install Playwright browsers
-RUN rfbrowser init --chromium
+RUN rfbrowser init chromium
 
 WORKDIR /home/jenkins/agent/workspace/Basic-SWT-Pipeline
 
