@@ -24,6 +24,8 @@ RUN apt-get update && apt-get install -y \
     libgdk-3-0 \
     libgdk-pixbuf2.0-0 \
     libgdk-pixbuf2.0-bin \
+    libgtk-3-bin \
+    libpango1.0-common \
     libfontconfig1 \
     libXcursor1 \
     libXfixes3 \
