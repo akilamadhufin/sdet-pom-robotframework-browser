@@ -47,6 +47,8 @@ RUN pip install --upgrade pip && \
         requests \
         tox
 
+ENV LD_LIBRARY_PATH=/usr/lib:/usr/lib/x86_64-linux-gnu
+
 # Install Playwright browsers
 RUN rfbrowser init chromium
 
