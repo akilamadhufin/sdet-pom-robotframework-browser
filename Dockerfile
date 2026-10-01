@@ -17,9 +17,14 @@ RUN apt-get update && apt-get install -y \
     libxshmfence1 \
     libcups2 \
     libcairo2 \
+    libcairo-gobject2 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libgtk-3-0 \
+    libgdk-pixbuf2.0-0 \
+    libfontconfig1 \
+    libXcursor1 \
+    libXfixes3 \
     fonts-liberation \
     libdrm2 \
     && rm -rf /var/lib/apt/lists/*
