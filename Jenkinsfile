@@ -11,7 +11,7 @@ pipeline {
         stage('Run tests via tox') {
             steps {
                 script {
-                    docker.image('basic-swt-rf:latest').inside {
+                    docker.image('basic-swt-rf:latest').inside("-v $WORKSPACE:$WORKSPACE") {
                         sh 'tox'
                     }
                 }
