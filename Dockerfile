@@ -16,6 +16,12 @@ RUN apt-get update && apt-get install -y \
     libasound2 \
     libxshmfence1 \
     libcups2 \
+    libcairo2 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libgtk-3-0 \
+    fonts-liberation \
+    libdrm2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js + npm (required for Robot Framework Browser)
